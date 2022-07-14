@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+const validUrl = require("valid-url");
 const validator = require("validator");
 const shortId = require("shortid");
 const config = require("config");
@@ -9,7 +10,7 @@ const Url = require("../models/url");
 
 //POST: /api/url/createShortenUrl
 router.post("/createShortenUrl", async (req, res) => {
-  const { actualUrl } = req.query;
+  let { actualUrl } = req.query;
   const baseUrl = config.get("baseUrl");
 
   let urlCode = shortId.generate();
@@ -22,7 +23,14 @@ router.post("/createShortenUrl", async (req, res) => {
     existUrlCode = await Url.findOne({ urlCode });
   }
 
+  if (!validator.isURL(actualUrl)) {
+    return res.status(401).json("Invalid URL");
+  }
+
   if (validator.isURL(actualUrl)) {
+    if (!validUrl.isUri(actualUrl)) {
+      actualUrl = "http://" + actualUrl + "/";
+    }
     try {
       const shortUrl = baseUrl + "/" + urlCode;
 
