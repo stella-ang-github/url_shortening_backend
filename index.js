@@ -14,8 +14,6 @@ app.use(express.json({ extended: false })); //Accept json into our API
 app.use("/", require("./routes/index"));
 app.use("/api/url", require("./routes/url"));
 
-const PORT = 9000;
+const PORT = process.env.PORT || 9000;
 
-app.listen(process.env.PORT || 9000, () =>
-  console.log(`Server running on ${PORT}`)
-);
+app.listen(PORT, () => console.log(`Server running on ${PORT}`));
