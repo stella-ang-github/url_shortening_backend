@@ -1,4 +1,4 @@
 {
     "mongoURI": "mongodb+srv://stellaang12:xiaoxiao11@cluster0.qqj0g.mongodb.net/?retryWrites=true&w=majority",
-    "baseUrl": "https://shortening-backend.herokuapp.com/"
+    "baseUrl": "http://localhost:9000"
 }
