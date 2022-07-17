@@ -1,4 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://stellaang12:xiaoxiao11@cluster0.qqj0g.mongodb.net/?retryWrites=true&w=majority",
+    "mongoURI": "mongodb+srv://stellaang12:popo123@cluster0.qqj0g.mongodb.net/?retryWrites=true&w=majority",
     "baseUrl": "url-shortening-stella-backend.herokuapp.com"
 }
