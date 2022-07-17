@@ -15,8 +15,5 @@ app.use("/", require("./routes/index"));
 app.use("/api/url", require("./routes/url"));
 
 var server_port = process.env.PORT || 9000;
-var server_host = "0.0.0.0";
 
-app.listen(server_port, server_host, () =>
-  console.log(`Server running on ${server_port}`)
-);
+app.listen(server_port, () => console.log(`Server running on ${server_port}`));
