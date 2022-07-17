@@ -24,6 +24,8 @@ router.post("/createShortenUrl", async (req, res) => {
 
   let existUrlCode = await Url.findOne({ urlCode });
 
+  let http_regex = /^(http|https)/;
+
   //Ensure same urlCode do not exist
   while (existUrlCode) {
     urlCode = shortId.generate();
@@ -35,8 +37,8 @@ router.post("/createShortenUrl", async (req, res) => {
   }
 
   if (urlPatternValidation(actualUrl)) {
-    if (!validUrl.isUri(actualUrl)) {
-      actualUrl = "http://" + actualUrl + "/";
+    if (!http_regex.test(actualUrl)) {
+      actualUrl = "https://" + actualUrl + "/";
     }
     try {
       const shortUrl = baseUrl + "/" + urlCode;
