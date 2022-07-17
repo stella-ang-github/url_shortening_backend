@@ -8,6 +8,13 @@ const config = require("config");
 
 const Url = require("../models/url");
 
+let urlPatternValidation = (URL) => {
+  const regex = new RegExp(
+    "(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?"
+  );
+  return regex.test(URL);
+};
+
 //POST: /api/url/createShortenUrl
 router.post("/createShortenUrl", async (req, res) => {
   let { actualUrl } = req.query;
@@ -23,11 +30,11 @@ router.post("/createShortenUrl", async (req, res) => {
     existUrlCode = await Url.findOne({ urlCode });
   }
 
-  if (!validator.isURL(actualUrl)) {
+  if (!urlPatternValidation(actualUrl)) {
     return res.status(401).json("Invalid URL");
   }
 
-  if (validator.isURL(actualUrl)) {
+  if (urlPatternValidation(actualUrl)) {
     if (!validUrl.isUri(actualUrl)) {
       actualUrl = "http://" + actualUrl + "/";
     }
