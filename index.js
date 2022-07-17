@@ -16,6 +16,10 @@ app.use("/api/url", require("./routes/url"));
 
 var server_port = process.env.PORT || 9000;
 
-app.listen(server_port, "0.0.0.0", () =>
-  console.log(`Server running on ${server_port}`)
-);
+if (process.env.NODE_ENV !== "test") {
+  app.listen(server_port, "0.0.0.0", () =>
+    console.log(`Server running on ${server_port}`)
+  );
+}
+
+module.exports = app;
